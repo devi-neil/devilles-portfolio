@@ -17,9 +17,17 @@ const Projects = () => {
       title: "Room Booking System",
       description: "A modern room reservation and booking system designed for office and meeting room management with real-time functionality and clean UI.",
       techStack: ["React", "Lucide React", "Firebase", "Node.js", "npm"],
-      image: "/xiscoroom.png",
-      images: ["/xiscoroom.png"],
-      link: "#"
+      image: "/room-reservation/room-login-page.png",
+      images: [
+        "/room-reservation/room-login-page.png",
+        "/room-reservation/dashboard-overall-view.png",
+        "/room-reservation/dashboard-daily-list.png",
+        "/room-reservation/dashboard-daily-timeline.png",
+        "/room-reservation/room-map.png",
+        "/room-reservation/user-reservation.png"
+      ],
+      link: "https://meeting-room-reservation-demo.web.app/",
+      demoLink: "https://meeting-room-reservation-demo.web.app/"
     },
     {
       title: "Fleet Monitoring and Reservation System",
@@ -103,9 +111,16 @@ const Projects = () => {
                 </div>
               </div>
               <div className="project-actions">
-                <a href={project.link} className="btn-icon" aria-label="View Project" onClick={(e) => e.stopPropagation()}>
-                  <ExternalLink size={20} />
-                </a>
+                {project.demoLink && (
+                  <a href={project.demoLink} target="_blank" rel="noopener noreferrer" className="btn-demo" aria-label="Live Demo" onClick={(e) => e.stopPropagation()}>
+                    <ExternalLink size={16} style={{ marginRight: '0.5rem' }} /> Live Demo
+                  </a>
+                )}
+                {!project.demoLink && (
+                  <a href={project.link} className="btn-icon" aria-label="View Project" onClick={(e) => e.stopPropagation()}>
+                    <ExternalLink size={20} />
+                  </a>
+                )}
                 <a href="#" className="btn-icon" aria-label="View Source" onClick={(e) => e.stopPropagation()}>
                   <Code size={20} />
                 </a>
@@ -166,9 +181,16 @@ const Projects = () => {
                 ))}
               </div>
               <div className="project-actions" style={{ borderTop: 'none', padding: '0', marginTop: '2rem' }}>
-                <a href={selectedProject.link} className="btn-icon" aria-label="View Project">
-                  <ExternalLink size={20} />
-                </a>
+                {selectedProject.demoLink && (
+                  <a href={selectedProject.demoLink} target="_blank" rel="noopener noreferrer" className="btn-demo" aria-label="Live Demo">
+                    <ExternalLink size={16} style={{ marginRight: '0.5rem' }} /> Live Demo
+                  </a>
+                )}
+                {!selectedProject.demoLink && (
+                  <a href={selectedProject.link} className="btn-icon" aria-label="View Project">
+                    <ExternalLink size={20} />
+                  </a>
+                )}
                 <a href="#" className="btn-icon" aria-label="View Source">
                   <Code size={20} />
                 </a>
@@ -273,6 +295,24 @@ const Projects = () => {
           color: white;
           transform: translateY(-2px);
         }
+        .btn-demo {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 1rem;
+          height: 40px;
+          border-radius: var(--radius-pill);
+          background: var(--accent-primary);
+          color: white;
+          font-weight: 500;
+          font-size: 0.9rem;
+          transition: all var(--transition-fast);
+          text-decoration: none;
+        }
+        .btn-demo:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
 
         /* Game Mode Overrides for Projects (Mission Cards) */
         body.game-mode .project-card {
@@ -317,6 +357,16 @@ const Projects = () => {
           background: transparent;
         }
         body.game-mode .btn-icon:hover {
+          background: var(--accent-primary);
+          color: #000;
+          box-shadow: var(--shadow-glow);
+        }
+        body.game-mode .btn-demo {
+          background: rgba(0, 240, 255, 0.1);
+          border: 1px solid var(--accent-primary);
+          color: var(--accent-primary);
+        }
+        body.game-mode .btn-demo:hover {
           background: var(--accent-primary);
           color: #000;
           box-shadow: var(--shadow-glow);
